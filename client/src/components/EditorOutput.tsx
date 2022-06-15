@@ -1,6 +1,6 @@
 import React from "react";
 
-const EditorOutput = ({ stdout, error }) => {
+const EditorOutput = ({ stdout, error }: { stdout: string[], error: boolean }) => {
   return (
     <div
       className="text-white flex flex-col pl-4 pt-1 leading-loose"
@@ -10,7 +10,7 @@ const EditorOutput = ({ stdout, error }) => {
       }}
     >
       <span className="font-bold">Standard Output</span>
-      {stdout.map((line, index) => {
+      {stdout.map((line: string, index: number) => {
         return (
           <pre className={error ? "text-red-500" : ""} key={index}>
             {line}

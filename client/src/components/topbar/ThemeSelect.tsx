@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import Select from "react-select";
 import { useTheme, useThemeUpdate } from "../../contexts/ThemeContext";
-import { themeOptions, themeBackGroundColors } from "../../themes";
+import { ThemeOption, themeOptions, themeBackGroundColors } from "../../themes";
 
 const ThemeSelect = () => {
   const theme = useTheme();
   const setTheme = useThemeUpdate();
 
-  const [selectedOption, setSelectedOption] = useState(theme);
+  const [selectedOption, setSelectedOption] = useState<ThemeOption>({value: "", label: ""});
 
   return (
     <Select
@@ -60,7 +60,8 @@ const ThemeSelect = () => {
       }}
       className=""
       defaultValue={selectedOption}
-      onChange={(curr) => {
+      // @ts-expect-error
+      onChange={(curr: ThemeOption) => {
         setSelectedOption(curr);
         setTheme(curr.value);
         document.documentElement.style.setProperty(
@@ -71,10 +72,10 @@ const ThemeSelect = () => {
         );
         const body = document.querySelector("body");
         if (themeBackGroundColors[curr.value]["type"] === "light") {
-          body.classList.remove("dark");
+          body?.classList.remove("dark");
         } else {
-          if (!body.classList.contains("dark")) {
-            body.classList.add("dark");
+          if (!body?.classList.contains("dark")) {
+            body?.classList.add("dark");
           }
         }
       }}

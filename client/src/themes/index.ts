@@ -7,7 +7,12 @@ import { pastelsOnDarkThemeData } from "./pastelsOnDark";
 import { tomorrowNightBlueThemeData } from "./tomorrowNightBlue";
 import { tomorrowThemeData } from "./tomorrow";
 
-export let themeOptions = [
+export interface ThemeOption {
+  value: string;
+  label: string
+}
+
+export let themeOptions: ThemeOption[] = [
   { value: 'light', label: 'VS Code Light' },
   { value: 'vs-dark', label: 'VS Code Dark' },
   { value: 'dracula', label: 'Dracula' },
@@ -20,7 +25,16 @@ export let themeOptions = [
   { value: 'tomorrow-night-blue', label: 'Tomorrow Night Blue' },
 ];
 
-export const themeBackGroundColors = {
+type ThemeObject = {
+  color: string,
+  type: "light" | "dark"
+}
+
+export interface ThemeBackGroundColors {
+  [key: string]: ThemeObject
+}
+
+export const themeBackGroundColors: ThemeBackGroundColors = {
   "light": {color: "#fffffe", type: "light"},
   "vs-dark": {color: "#1e1e1e", type: "dark"},
   "dracula": {color: `#${draculaThemeData["rules"][0]["background"]}`, type: "dark"},

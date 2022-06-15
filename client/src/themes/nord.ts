@@ -1,4 +1,6 @@
-export const nordThemeData = {
+import * as monaco from "monaco-editor";
+
+export const nordThemeData: monaco.editor.IStandaloneThemeData = {
   "base": "vs-dark",
   "inherit": true,
   "rules": [

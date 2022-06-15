@@ -1,4 +1,6 @@
-export const tomorrowThemeData = {
+import * as monaco from "monaco-editor";
+
+export const tomorrowThemeData: monaco.editor.IStandaloneThemeData = {
   "base": "vs",
   "inherit": true,
   "rules": [

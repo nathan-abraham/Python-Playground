@@ -1,4 +1,4 @@
-import React from 'react'
+// @ts-expect-error
 import { initVimMode } from "monaco-vim";
 import { useVim, useVimUpdate } from "../../contexts/VimContext";
 import { useEditor } from "../../contexts/EditorContext";

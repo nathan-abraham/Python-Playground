@@ -1,4 +1,6 @@
-export const solarizedLightThemeData = {
+import * as monaco from "monaco-editor";
+
+export const solarizedLightThemeData: monaco.editor.IStandaloneThemeData = {
   "base": "vs",
   "inherit": true,
   "rules": [

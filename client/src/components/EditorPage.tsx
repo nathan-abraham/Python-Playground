@@ -10,10 +10,10 @@ import { themeBackGroundColors } from "../themes";
 import { useVim } from "../contexts/VimContext";
 
 const EditorPage = () => {
-  const [submit, setSubmit] = useState(false);
-  const [stdout, setStdout] = useState([]);
-  const [error, setError] = useState(false);
-  const [editorReady, setEditorReady] = useState(false);
+  const [submit, setSubmit] = useState<boolean>(false);
+  const [stdout, setStdout] = useState<string[]>([]);
+  const [error, setError] = useState<boolean>(false);
+  const [editorReady, setEditorReady] = useState<boolean>(false);
 
   const theme = useTheme();
   const vimMode = useVim();
@@ -24,7 +24,7 @@ const EditorPage = () => {
     }
   }
 
-  const afterSubmit = (code) => {
+  const afterSubmit = (code: string) => {
     // console.log("request sent!");
     axios.post("http://localhost:80/run", { code }).then(({ data }) => {
       console.log(data);

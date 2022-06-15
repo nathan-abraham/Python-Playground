@@ -1,4 +1,6 @@
-export const draculaThemeData = {
+import * as monaco from "monaco-editor";
+
+export const draculaThemeData: monaco.editor.IStandaloneThemeData = {
   "base": "vs-dark",
   "inherit": true,
   "rules": [

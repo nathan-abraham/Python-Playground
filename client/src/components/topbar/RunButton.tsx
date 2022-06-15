@@ -2,7 +2,7 @@ import React from 'react'
 import { IconContext } from "react-icons";
 import { FaPlay } from "react-icons/fa";
 
-const RunButton = ( {onRun, editorReady }) => {
+const RunButton = ( {onRun, editorReady }: { onRun: React.MouseEventHandler<HTMLButtonElement>, editorReady: boolean}) => {
   return (
       <button
         disabled={!editorReady}
@@ -11,7 +11,7 @@ const RunButton = ( {onRun, editorReady }) => {
       >
         <IconContext.Provider
           value={{
-            color: document.querySelector("body").classList.contains("dark") ? "rgb(74, 222, 128)" : "rgb(22, 101, 52)",
+            color: document.querySelector("body")?.classList.contains("dark") ? "rgb(74, 222, 128)" : "rgb(22, 101, 52)",
           }}
         >
           <FaPlay />

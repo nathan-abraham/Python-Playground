@@ -1,4 +1,6 @@
-export const tomorrowNightBlueThemeData = {
+import * as monaco from "monaco-editor";
+
+export const tomorrowNightBlueThemeData: monaco.editor.IStandaloneThemeData = {
   "base": "vs-dark",
   "inherit": true,
   "rules": [
