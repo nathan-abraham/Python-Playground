@@ -29,8 +29,8 @@ import {
   tomorrowThemeData,
 } from "../themes";
 
-
-MonacoServices.install(monaco);
+import { buildWorkerDefinition } from 'monaco-editor-workers';
+buildWorkerDefinition('./node_modules/monaco-editor-workers/dist/workers', new URL('', window.location.href).href, false);
 
 function createLanguageClient(
   transports: MessageTransports

@@ -41,7 +41,7 @@ const EditorPage = () => {
   return (
     <div style={{ backgroundColor: themeBackGroundColors[theme]["color"], height: "100vh", display: "flex", flexDirection: "column" }}>
       <div className="flex flex-col items-center">
-        <Topbar onRun={onRun} editorReady={editorReady} />
+        <Topbar onRun={onRun} editorReady={editorReady} submit={submit} />
       </div>
       <Split
         sizes={[50, 50]}

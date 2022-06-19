@@ -4,11 +4,11 @@ import ThemeSelect from "./ThemeSelect";
 import VimButton from "./VimButton";
 import DownloadButton from "./DownloadButton"
 
-const Topbar = ({ onRun, editorReady }: { onRun: React.MouseEventHandler<HTMLButtonElement>, editorReady: boolean } ) => {
+const Topbar = ({ onRun, editorReady, submit }: { onRun: React.MouseEventHandler<HTMLButtonElement>, editorReady: boolean, submit: boolean } ) => {
 
   return (
     <div className="flex items-center space-x-4">
-      <RunButton onRun={onRun} editorReady={editorReady} />
+      <RunButton onRun={onRun} editorReady={editorReady} submit={submit} />
       <ThemeSelect />
       <VimButton />
       <DownloadButton />

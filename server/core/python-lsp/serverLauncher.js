@@ -2,7 +2,6 @@ rpc = require("@codingame/monaco-jsonrpc");
 server = require("@codingame/monaco-jsonrpc/lib/server");
 lsp = require('vscode-languageserver');
 const Message = require("vscode-languageserver").Message;
-// lsp = require('vscode-languageserver-protocol');
 
 function launch(socket) {
   const reader = new rpc.WebSocketMessageReader(socket);
