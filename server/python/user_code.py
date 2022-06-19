@@ -1,5 +1,6 @@
 import numpy as np
 
-print(np.zeros(8))
-print(2+2)
-print(8+8)
+for i in range(10000):
+    a = 0
+
+print("hi")

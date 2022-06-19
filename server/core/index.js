@@ -31,6 +31,16 @@ function createFile(code) {
   fs.writeFileSync(BASE_PYTHON_FILE_NAME, code);
 }
 
+const server = app.listen(port, () => {
+  console.log(`Python Playground listening on port ${port}`)
+  exec("docker build -t python_playground_sandbox .", (err, stdout, stderr) => {
+    console.log("Base image built");
+    exec("docker images -q python_playground_sandbox", (err, stdout, stderr) => {
+      base_img_id = stdout.trim();
+    })
+  })
+})
+
 app.post('/run', (req, res) => {
   // console.log(req.body.code);
   try {
@@ -42,68 +52,29 @@ app.post('/run', (req, res) => {
     return;
   }
 
-  // let options = {
-  //   mode: "text",
-  //   pythonOptions: ["-u"],
-  // };
+  exec(`docker run -v ${path.join(process.cwd(), "python")}:/sandbox/python/temp:ro --rm python_playground_sandbox`, (err, stdout, stderr) => {
+    if (err) {
+      res.json({ status: "failure", error: "Server runtime error"});
+      console.error(err);
+      return;
+    }
 
-  // PythonShell.run(BASE_PYTHON_FILE_NAME, options, (err, results) => {
-  //   if (err) {
-  //     console.log("Error in user's python code");
-  //     console.log(err);
-  //     res.json({ status: "failure", error: coreUtils.formatError(err.traceback ? err.traceback : err.stack, err.traceback ? false : true)});
-  //   } else {
-  //     console.log("results:", results);
-  //     res.json({ status: "success", results: results});
-  //   }
-  // });
+    console.log("stderr: ", stderr);
+    console.log("stdout: ", stdout);
 
-  // exec("docker build -t python_playground_sandbox .", (a, b, c) => {
-    let img_id = "";
-    exec("docker images -q python_playground_sandbox", (err, stdout, stderr) => {
-      img_id = stdout.trim();
-    })
-
-    exec(`docker run -v ${path.join(process.cwd(), "python")}:/sandbox/python/temp:ro --rm python_playground_sandbox`, (err, stdout, stderr) => {
-      if (err) {
-        res.json({ status: "failure", error: "Server runtime error"});
-        console.error(err);
-        return;
-      }
-
-      console.log("stderr: ", stderr);
-      console.log("stdout: ", stdout);
-
-      if (stderr != "") {
-        res.json({ status: "failure", error: coreUtils.formatError(stderr)})
+    if (stderr != "") {
+      res.json({ status: "failure", error: coreUtils.formatError(stderr)})
+    } else {
+      const lines = stdout.split("\n");
+      if (lines[lines.length - 1].trim() === "Timeout") {
+        res.json({ status: "failure", error: "Python script timeout"})
       } else {
-        const lines = stdout.split("\n");
-        if (lines[lines.length - 1].trim() === "Timeout") {
-          res.json({ status: "failure", error: "Python script timeout"})
-        } else {
-          lines.splice(lines.length - 2, 1);
-          res.json({ status: "success", results: lines});
-        }
+        lines.splice(lines.length - 2, 1);
+        res.json({ status: "success", results: lines});
       }
+    }
+  });
 
-      // if (img_id === "") {
-      //   return;
-      // } else {
-      //   exec(`docker rmi ${img_id}`);
-      // }
-    });
-  // });
-
-})
-
-const server = app.listen(port, () => {
-  console.log(`Python Playground listening on port ${port}`)
-  exec("docker build -f Dockerfile-base -t python_playground_sandbox .", (err, stdout, stderr) => {
-    console.log("Base image built");
-    exec("docker images -q python_playground_sandbox", (err, stdout, stderr) => {
-      base_img_id = stdout.trim();
-    })
-  })
 })
 
 server.on("upgrade", (request, socket, head) => {
@@ -147,4 +118,4 @@ function serverCloseCallback() {
 
 process.on('SIGINT', serverCloseCallback);  // CTRL+C
 process.on('SIGQUIT', serverCloseCallback); // Keyboard quit
-process.on('SIGTERM', serverCloseCallback); // `kill` command
+process.on('SIGTERM', serverCloseCallback); // `kill command
