@@ -27,4 +27,5 @@ yarn-error.log*
 test.py
 run.py
 set_permissions.py
+user_code.py
 /todo.txt
