@@ -75,7 +75,25 @@ app.post('/run', (req, res) => {
     }
   });
 
-})
+});
+
+app.post("/update-packages", (req, res) => {
+  fs.writeFileSync("./python/requirements.txt", req.body.packages);
+  
+  exec("docker build -t python_playground_sandbox .", (err, stdout, stderr) => {
+    if (err) {
+      res.json({ status: "failure" })
+      return;
+    }
+
+    console.log("Base image rebuilt");
+    exec("docker images -q python_playground_sandbox", (err, stdout, stderr) => {
+      base_img_id = stdout.trim();
+    })
+    res.json({ status: "success" })
+  })
+
+});
 
 server.on("upgrade", (request, socket, head) => {
   console.log('server on upgrade');
@@ -114,6 +132,7 @@ function serverCloseCallback() {
   execSync(`docker rmi ${base_img_id}`);
   server.close();
   wss.close();
+  process.exit();
 }
 
 process.on('SIGINT', serverCloseCallback);  // CTRL+C

@@ -8,7 +8,7 @@ const RunButton = ( {onRun, editorReady, submit }: { onRun: React.MouseEventHand
       <button
         disabled={!editorReady || submit}
         onClick={onRun}
-        className="flex gap-2 justify-center items-center p-4 bg-green-400 dark:bg-green-800 rounded-md hover:opacity-75 m-4"
+        className="flex gap-2 justify-center items-center p-4 bg-green-400 dark:bg-green-800 rounded-md hover:opacity-75 m-4 transition-opacity"
         style={{ minWidth: 87, minHeight: 56 }}
       >
       {

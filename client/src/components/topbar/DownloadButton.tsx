@@ -5,7 +5,7 @@ const DownloadButton = () => {
 
   return (
     <button 
-    className="p-3 bg-purple-400 text-white hover:opacity-75"
+    className="p-2 bg-purple-400 text-white hover:opacity-75 rounded-md transition-opacity"
     onClick={() => {
       const data = editor?.getValue();
 

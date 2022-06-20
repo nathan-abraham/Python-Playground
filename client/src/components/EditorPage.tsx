@@ -9,6 +9,9 @@ import { useTheme } from "../contexts/ThemeContext";
 import { themeBackGroundColors } from "../themes";
 import { useVim } from "../contexts/VimContext";
 
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 const EditorPage = () => {
   const [submit, setSubmit] = useState<boolean>(false);
   const [stdout, setStdout] = useState<string[]>([]);
@@ -26,16 +29,18 @@ const EditorPage = () => {
 
   const afterSubmit = (code: string) => {
     // console.log("request sent!");
-    axios.post("http://localhost:80/run", { code }).then(({ data }) => {
-      console.log(data);
-      setSubmit(false);
-      setStdout(data.status === "success" ? data.results : data.error);
-      if (data.status !== "success") {
-        setError(true);
-      } else {
-        setError(false);
+    axios.post("http://localhost:80/run", { code })
+      .then(({ data }) => {
+        console.log(data);
+        setSubmit(false);
+        setStdout(data.status === "success" ? data.results : data.error);
+        if (data.status !== "success") {
+          setError(true);
+        } else {
+          setError(false);
+        }
       }
-    });
+    );
   };
 
   return (
@@ -66,6 +71,11 @@ const EditorPage = () => {
         }}
       ></code>
       <div style={{height: vimMode == null ? "24px" : "0px", backgroundColor: "var(--gutter-color)"}}></div>
+      <ToastContainer 
+        position="top-right"
+        hideProgressBar={true}
+        theme={themeBackGroundColors[theme].type === "dark" ? "dark" : "light"}
+      />
     </div>
   );
 };

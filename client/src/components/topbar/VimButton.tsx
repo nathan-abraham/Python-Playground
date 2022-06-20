@@ -9,7 +9,7 @@ const VimButton = () => {
   const setVimMode = useVimUpdate();
 
   return (
-    <button className="bg-red-400 text-black dark:text-white p-2 rounded-md hover:opacity-75" onClick={() => {
+    <button className="bg-red-400 text-white p-2 rounded-md hover:opacity-75 transition-opacity" onClick={() => {
       if (vimMode != null) {
         vimMode.dispose();
         setVimMode(null);

@@ -7,7 +7,7 @@ const ThemeSelect = () => {
   const theme = useTheme();
   const setTheme = useThemeUpdate();
 
-  const [selectedOption, setSelectedOption] = useState<ThemeOption>({value: "", label: ""});
+  const [selectedOption, setSelectedOption] = useState<ThemeOption>({value: theme, label: "Color Theme"});
 
   return (
     <Select
@@ -32,18 +32,8 @@ const ThemeSelect = () => {
             themeBackGroundColors[theme]["type"] === "dark"
               ? "#023950"
               : "#ffffff",
-          color: "white",
+          color: "black",
           minWidth: "15ch",
-          // match with the menu
-          // borderRadius: state.isFocused ? "3px 3px 0 0" : 3,
-          // Overwrittes the different states of border
-          // borderColor: state.isFocused ? "yellow" : "green",
-          // Removes weird border around container
-          // boxShadow: state.isFocused ? null : null,
-          // "&:hover": {
-          // Overwrittes the different states of border
-          // borderColor: state.isFocused ? "red" : "blue",
-          // },
         }),
         menu: (provided) => ({
           ...provided,
@@ -80,7 +70,7 @@ const ThemeSelect = () => {
         }
       }}
       options={themeOptions}
-      placeholder={<div>Color Theme</div>}
+      placeholder="THEMMMEEE"
     />
   );
 };
