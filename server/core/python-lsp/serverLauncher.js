@@ -1,6 +1,7 @@
 rpc = require("@codingame/monaco-jsonrpc");
 server = require("@codingame/monaco-jsonrpc/lib/server");
 lsp = require('vscode-languageserver');
+require("dotenv").config()
 const Message = require("vscode-languageserver").Message;
 
 function launch(socket) {
@@ -12,7 +13,7 @@ function launch(socket) {
   );
   const serverConnection = server.createServerProcess(
     'JSON',
-    'C:/Users/shibu/AppData/Local/Programs/Python/Python39/Scripts/pylsp' // path to python-lsp-server called with pylsp command
+    process.env.PYTHON_LSP_SERVER_PATH // path to python-lsp-server called with pylsp command
   );
   server.forward(socketConnection, serverConnection, (message) => {
     // console.log('server forward');

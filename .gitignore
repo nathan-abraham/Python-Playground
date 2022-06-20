@@ -24,7 +24,13 @@ yarn-error.log*
 
 /.vscode
 
+# Python scripts
 test.py
 run.py
 set_permissions.py
+
+# Todo
 /todo.txt
+
+# Environemnt variables
+.env
