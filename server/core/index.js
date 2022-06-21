@@ -1,6 +1,5 @@
 const fs = require("fs");
 const { exec, execSync } = require("child_process");
-const PythonShell = require("python-shell").PythonShell;
 const express = require('express');
 const cors = require("cors");
 const url = require("url");
@@ -15,7 +14,6 @@ const port = 80;
 const SOCKETPATH = "/monaco-lsp-server";
 
 const BASE_PYTHON_FILE_NAME = "./python/user_code.py";
-const PYTHON_RUN_FILE = "./python/run.py";
 
 let base_img_id = "";
 
