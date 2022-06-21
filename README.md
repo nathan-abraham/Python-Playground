@@ -16,7 +16,7 @@
     <img src="client/assets/logo.png" alt="Logo" width="300">
   </a>
 
-  <h3 align="center">Python Playground</h3>
+  <h1 align="center">Python Playground</h3>
 
   <p align="center">
     Run python code securely and quickly in the browser!
@@ -60,7 +60,7 @@ Python Playground acts as a simple tool to get started with python.
  - Excellent code editing experience
    - Powered by Monaco, the editor that powers VS Code
  - Rich python intellisense and syntax highlighting
-   - Powered Python Language Server Protocol (LSP) implementation
+   - Powered WebSockets and a Python Language Server Protocol (LSP) implementation
  - Containerized python runtime environments to bolster server security
    - Powered by Docker
  - Resizeable editor and output panes
