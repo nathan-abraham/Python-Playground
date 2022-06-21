@@ -48,6 +48,8 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
+<img src="static/demo.png" align="center">
+
 Python is one of the most notorius languages in the industry. Known for its
 flexibility and english-like syntax, Python serves as a great language
 for beginners. As beginners may not have adequate development environments,
@@ -67,6 +69,8 @@ Python Playground acts as a simple tool to get started with python.
  - Built-in package manager to use the most cutting-edge `pip` packages
  - Download code from brower directly into `.py` files
  - Modern UI with a variety of light and dark themes
+
+<img src="static/package_manager.png" align="center">
 
 ### Built With
 
