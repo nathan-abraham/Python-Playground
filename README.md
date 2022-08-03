@@ -121,7 +121,7 @@ user experience with adequate security.
     ```
 5. Find path of python LSP
     ```sh
-    which pyslp # save this output
+    which pylsp # save this output
     ```
 6. Create a `.env` file in `server` put the path there as `PYTHON_LSP_SERVER_PATH`
 7. Start client (`cd` into `client`)
